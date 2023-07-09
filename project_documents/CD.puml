@@ -1,0 +1,114 @@
+@startuml
+
+class User {
+    -userId: int
+    -username: String
+    -firstName: String
+    -lastName: String
+    -email: String
+    -password: String
+    -friendIds: List<int>
+    -avatarId: int
+}
+
+class Hero {
+    -userId: int
+    -name: String
+    -level: int
+    -experience: int
+    -health: int
+    -currency: int
+    -itemIds: List<int>
+}
+
+class Task {
+    -taskId: int
+    -name: String
+    -description: String
+    -difficulty: Difficulty
+    -completed: int
+    -frequency: Frequency
+    -dueDate: DateRange
+    -deadline: LocalDate
+    -rewardId: int
+}
+
+class Quest {
+    -questId: int
+    -name: String
+    -taskIds: List<int>
+    -completed: boolean
+    -difficulty: Difficulty
+    -duration: Duration
+    -dueDate: DateRange
+    -deadline: LocalDate
+    -rewardId: int
+}
+
+class Campaign {
+    -campaignId: int
+    -name: String
+    -questIds: List<int>
+}
+
+class Item {
+    -itemId: int
+    -name: String
+    -description: String
+    -rarity: Rarity
+}
+
+class Reward {
+    -rewardId: int
+    -name: String
+    -description: String
+    -currency: int
+    -experience: int
+    -itemIds: List<int>
+}
+
+enum Rarity {
+    COMMON
+    UNCOMMON
+    RARE
+    EPIC
+    LEGENDARY
+}
+
+enum Difficulty {
+    EASY
+    MEDIUM
+    HARD
+    INSANE
+}
+
+enum Duration {
+    SHORT_TERM
+    MID_TERM
+    LONG_TERM
+}
+
+enum Frequency {
+    NONE
+    DAILY
+    WEEKLY
+    MONTHLY
+}
+
+class DateRange {
+    -startDate: LocalDate
+    -endDate: LocalDate
+    +has(LocalDate) boolean
+}
+
+Campaign o-- Quest
+Quest o-- Task
+
+Task --> Reward
+Task --> DateRange
+
+User o-- Hero
+Hero o-- Item
+Reward --> Item
+
+@enduml

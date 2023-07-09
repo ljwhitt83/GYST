@@ -1,0 +1,10 @@
+@startuml
+
+User -> Website: GET /users/{userId}
+Website -> ServiceAPI: GET /users/{userId}
+ServiceAPI -> Database: Query user
+Database --> ServiceAPI: Retrieve user
+ServiceAPI --> Website: User Object
+Website --> User: User Object
+
+@enduml
